@@ -1,11 +1,11 @@
 import { sql } from './db.js'
 
 sql`
-  CREATE TABLE users (
+  CREATE TABLE neymar (
       id text PRIMARY KEY,
-      name character varying(255),
-      password character varying(255),
-      profile character varying(255)
+      idade character varying(255),
+      posição character varying(255),
+      nome_da_esposa character varying(255)
   );
 `.then(() => {
   console.log('tabela criada');

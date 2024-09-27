@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neymar</title>
+</head>
+<body>
+
+    <p>Idade</p>
+    <input type="text" id="idade">
+    <p>Posição</p>
+    <input type="text" id="posição">
+    <p>Nome da Esposa</p>
+    <input type="text" id="nome_da_esposa">
+
+    <button onclick="criarNeymar()">
+        Cadastrar
+    </button>
+
+    <p id="neymar"></p>
+
+    <script>
+        async function pegarNeymar (){
+            const resposta = await fetch('http://localhost:3333/neymar', {
+                method: 'GET'
+            })
+
+            const neymar = await resposta.json();
+            console.log(neymar);
+            const neymars = document.getElementById('neymar')
+            neymars.innerHTML = neymar[0].idade
+        }
+        pegarNeymar();
+
+        async function criarNeymar () {
+            const idade = document.getElementById('idade').value;
+            const posição = document.getElementById('posição').value;
+            const nome_da_esposa = document.getElementById('nome_da_esposa').value;
+
+            const neymar = {
+                "idade": idade,
+                "posição": posição,
+                "nome_da_esposa": nome_da_esposa,
+            }
+            const resposta = await fetch('http://localhost:3333/neymar', {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(neymar)
+            });
+
+            await pegarNeymar()
+        }
+        
+    </script>
+</body>
+</html>
